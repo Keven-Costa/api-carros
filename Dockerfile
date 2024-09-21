@@ -3,13 +3,12 @@ FROM ubuntu:latest AS build
 
 # Atualiza o apt-get e instala OpenJDK 22 e Maven
 RUN apt-get update
-RUN apt-get install openjdk-22-jdk maven -y
-
-# Copia todos os arquivos do projeto para dentro da imagem
+RUN apt-get install openjdk-22-jdk -y
 COPY . .
 
-# Executa o Maven para construir o JAR
+RUN apt-get install maven -y
 RUN mvn clean install
+
 
 # Etapa de Execução
 FROM openjdk:22-jdk-slim
@@ -22,3 +21,5 @@ COPY --from=build /target/deploy_render-1.0.0.jar app.jar
 
 # Comando para executar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
