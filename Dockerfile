@@ -2,8 +2,8 @@
 FROM ubuntu:latest AS build
 
 # Atualiza o apt-get e instala OpenJDK 22 e Maven
-RUN apt-get update && \
-    apt-get install openjdk-22-jdk maven -y
+RUN apt-get update
+RUN apt-get install openjdk-22-jdk maven -y
 
 # Copia todos os arquivos do projeto para dentro da imagem
 COPY . .
